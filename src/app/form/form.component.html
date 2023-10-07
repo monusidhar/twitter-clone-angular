@@ -1,0 +1,32 @@
+<form (ngSubmit)="onFormSubmit()" [formGroup]="userForm">
+    <div>
+        <input type="text" placeholder="address1" formControlName="address1" />
+        <small class="text-danger" *ngIf="userForm.get('address1')?.touched && userForm.get('address1')?.invalid">address1 should not be empty</small>
+    </div>
+    <input type="text" placeholder="address2" formControlName="address2" />
+    <input type="text" placeholder="address3" formControlName="address3" />
+    <input type="checkbox" formControlName="checkbox"> checkbox
+    <div>
+        <input type="radio" formControlName="gender" value="male"/> Male
+        <input type="radio" formControlName="gender" value="female"/> Female
+    </div>
+    <hr>
+    <div formArrayName="additionalRows">
+            <div *ngFor="let row of additionalRows.controls; let i=index" [formGroupName]="i">
+                <div>
+                    <input type="text" placeholder="address1" formControlName="address1" />
+                    <small class="text-danger" *ngIf="row.get('address1')?.touched && row.get('address1')?.invalid">address1 should not be empty</small>
+                </div>
+                <input type="text" placeholder="address2" formControlName="address2" />
+                <input type="text" placeholder="address3" formControlName="address3" />
+                <input type="checkbox" formControlName="checkbox"> checkbox
+                <div>
+                    <input type="radio" formControlName="gender" value="male"/> Male
+                    <input type="radio" formControlName="gender" value="female"/> Female
+                </div>
+            </div>
+            <hr>
+    </div>
+    <a class="btn btn-sm btn-success" (click)="addRow()">add new</a><br />
+    <button type="submit" class="btn btn-primary btn-sm">Save</button>
+</form>
